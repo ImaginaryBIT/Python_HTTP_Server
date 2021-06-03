@@ -34,7 +34,7 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         """Serve a POST request."""
         r, info = self.deal_post_data()
-        print(info + "\nSent from: " + str(self.client_address))
+        print(urllib.parse.unquote_plus(info) + "\nSent from: " + str(self.client_address))
         f = BytesIO()
         f.write(b'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">')
         f.write(b"<html>\n<title>Upload Result Page</title>\n")
