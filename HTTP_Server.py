@@ -34,7 +34,7 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         """Serve a POST request."""
         r, info = self.deal_post_data()
-        print((r, info, "by: ", self.client_address))
+        print(info + "\nSent from: " + str(self.client_address))
         f = BytesIO()
         f.write(b'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">')
         f.write(b"<html>\n<title>Upload Result Page</title>\n")
@@ -60,8 +60,15 @@ class HTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def deal_post_data(self):
         content_type = self.headers['content-type']
         if not content_type:
-            return (False, "Content-Type header doesn't contain boundary")
-        boundary = content_type.split("=")[1].encode()
+            return (False, "No Content-Type header detected")
+        # Deal with simple POST request
+        try:
+            boundary = content_type.split("=")[1].encode()
+        except:
+            content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
+            post_data = self.rfile.read(content_length) # <--- Gets the data itself
+            return (False, post_data.decode('utf-8'))
+
         remainbytes = int(self.headers['content-length'])
         line = self.rfile.readline()
         remainbytes -= len(line)
